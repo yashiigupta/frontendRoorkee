@@ -5,8 +5,8 @@ import JobOpenings from "@/components/JobOpenings";
 import { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [component, setComponent] = useState("");
-  const [componentToRender, setComponentToRender] = useState(<></>);
+  const [component, setComponent] = useState("Schemes");
+  const [componentToRender, setComponentToRender] = useState(<Schemes />);
 
   useEffect(() => {
     if(component === "Schemes") setComponentToRender(<Schemes />);

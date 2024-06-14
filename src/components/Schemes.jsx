@@ -5,7 +5,7 @@ import { TfiBag } from "react-icons/tfi";
 import { BsGenderFemale } from "react-icons/bs";
 import { MdCurrencyRupee } from "react-icons/md";
 import styles from '../styles/schemes.module.css';
-import Categories from "./categories";
+import Categories from "./Categories";
 export default function Schemes()
 {
   return (

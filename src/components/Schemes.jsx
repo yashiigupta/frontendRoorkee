@@ -1,6 +1,6 @@
 import { IoArrowBackOutline } from "react-icons/io5";
 import { FiMapPin } from "react-icons/fi";
-import { SiCodeblocks } from "react-icons/si";
+import { TbBuilding } from "react-icons/tb";
 import { TfiBag } from "react-icons/tfi";
 import { BsGenderFemale } from "react-icons/bs";
 import { MdCurrencyRupee } from "react-icons/md";
@@ -20,11 +20,11 @@ export default function Schemes()
       </div>
       <div className={styles.buttons}>
         <button className={styles.checkBtn}><FiMapPin className={styles.checkIcons}/> State</button>
-        <button className={styles.checkBtn}><SiCodeblocks className={styles.checkIcons}/> Department</button>
+        <button className={styles.checkBtn}><TbBuilding className={styles.checkIcons}/> Department</button>
         <button className={styles.checkBtn}><TfiBag className={styles.checkIcons}/> Occupation</button>
         <button className={styles.checkBtn}><BsGenderFemale className={styles.checkIcons}/> Gender</button>
         <button className={styles.checkBtn}><MdCurrencyRupee className={styles.checkIcons}/> Income</button>
-      </div>
+        </div>
       <Categories />
     </div>
   )

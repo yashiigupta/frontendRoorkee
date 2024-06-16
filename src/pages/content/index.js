@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FaArrowLeft, FaShare } from "react-icons/fa";
 import dummyData from '../../dummyData.json';
-import ShareModal from '/Users/monukumar/frontend-roorkee/src/pages/content/shareModel/index.js';
+import ShareModal from "./shareModel"
 
 const Apply = () => {
   const router = useRouter();

@@ -24,7 +24,7 @@ const ShareModal = ({ isOpen, onRequestClose, shareUrl }) => {
       setCopied(true);
       setTimeout(() => {
         setCopied(false);
-      }, 3000); // I am giving time to 3 sec. to show copied
+      }, 3000); // I am giving time of 3 sec. to show copied
     };
   
     return (

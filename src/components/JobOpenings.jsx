@@ -6,7 +6,7 @@ import { BsGenderFemale } from "react-icons/bs";
 import { MdCurrencyRupee } from "react-icons/md";
 import styles from '../styles/schemes.module.css';
 
-export default function Schemes()
+export default function JobOpenings()
 {
   return (
     <div className={styles.schemesContainer}>

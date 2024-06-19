@@ -1,3 +1,4 @@
+// import dummytata from "/Users/monukumar/frontend-roorkee/src/dummyData.json"
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import {

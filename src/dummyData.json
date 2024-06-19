@@ -1,5 +1,6 @@
 [
   {
+    "state" : "Bihar",
     "scheme_id": "6f0d2ca0-c076-41b2-bd52-b76cf8834b49",
     "department": "Agriculture and Farmers' Welfare Department",
     "scheme_name": "Agriculture Academic Studies",
@@ -14,6 +15,7 @@
     "scheme_link": "https://meghalaya.gov.in/schemes/content/35910"
   },
   {
+    "state" : "Goa",
     "scheme_id": "18ddb111-95f8-406c-9645-df61db09c4b1",
     "department": "Agriculture and Farmers' Welfare Department",
     "scheme_name": "Agriculture Census",
@@ -26,6 +28,7 @@
     "scheme_link": "https://meghalaya.gov.in/schemes/content/36273"
   },
   {
+    "state":"Jharkhand",
     "scheme_id": "9ba45687-e959-4e86-ad28-f7bb2e737bcd",
     "department": "Agriculture and Farmers' Welfare Department",
     "scheme_name": "Agriculture Engineering (Mechanical)",
@@ -39,6 +42,7 @@
     "scheme_link": "https://meghalaya.gov.in/schemes/content/35875"
   },
   {
+    "state" : "Jammu & kashmir",
     "scheme_id": "4253274c-45dc-4c25-b85f-a1ba06e0ac2c",
     "department": "Agriculture and Farmers' Welfare Department",
     "scheme_name": "Agriculture Information Unit",
@@ -108,6 +112,7 @@
     "scheme_link": "https://meghalaya.gov.in/schemes/content/35877"
   },
   {
+    "state":"Tamil Nadu",
     "scheme_id": "5512acc4-c7d9-42d5-8945-95c48333973f",
     "department": "Agriculture and Farmers' Welfare Department",
     "scheme_name": "Bio Control Laboratory and Pesticides Testing Laboratory",
@@ -876,6 +881,7 @@
     "scheme_link": "https://meghalaya.gov.in/schemes/content/37478"
   },
   {
+    "state":"Haryana",
     "scheme_id": "d07480cc-a451-4d2c-b53b-791f9d99f6a3",
     "department": "Agriculture and Farmers' Welfare Department",
     "scheme_name": "Organic Manures",

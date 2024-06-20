@@ -1,6 +1,3 @@
-import Model from '@/pages/model';
-import { useState } from 'react';
-import { FaBuilding, FaMapMarkerAlt, FaUserTie, FaVenusMars } from 'react-icons/fa';
 import { IoArrowBackOutline } from "react-icons/io5";
 import { FiMapPin } from "react-icons/fi";
 import { TbBuilding } from "react-icons/tb";
@@ -12,17 +9,13 @@ import styles from '../styles/schemes.module.css';
 export default function JobOpenings()
 {
   return (
-    <>
-      <div className="bg-white font-sans">
-        <button className="flex items-center justify-between p-0 border-none mb-5 text-base bg-white">
-          <IoArrowBackOutline className="mr-1 text-xl" /> Back
-        </button>
-        <div className="flex justify-between flex-wrap">
-          <h1 className="mt-0 mb-4 text-[30px] font-semibold">Job Opening</h1>
-          <div>
-            <button className="font-semibold p-2 rounded-lg border border-gray-300 bg-white mr-2">Regional Language</button>
-            <button className="font-semibold p-2 rounded-lg border border-gray-300 bg-white px-7">English</button>
-          </div>
+    <div className={styles.schemesContainer}>
+      <button className = {styles.backBtn}><IoArrowBackOutline className = {styles.backArrow}/> Back</button>
+      <div className={styles.schemesSection}>
+        <h1 className={styles.heading}>Job Openings</h1>
+        <div>
+          <button className={styles.langBtn}>Regional Language</button>
+          <button className={styles.engBtn}>English</button>
         </div>
       </div>
       <div className={styles.buttons}>
@@ -32,7 +25,7 @@ export default function JobOpenings()
         <button className={styles.checkBtn}><BsGenderFemale className={styles.checkIcons}/> Gender</button>
         <button className={styles.checkBtn}><MdCurrencyRupee className={styles.checkIcons}/> Income</button>
       </div>
-      {/* <Model isVisible={selectedCategory !== null} category={selectedCategory} onClose={handleCloseModal}/> */}
-    </>
-  );
+      
+    </div>
+  )
 }

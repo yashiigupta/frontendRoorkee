@@ -58,7 +58,6 @@
 }
 
 .checkBtn {
-  display: flex;
   margin-bottom: 10px;
   font-weight: 500;
   padding: 8px 10px 12px 10px;
@@ -92,7 +91,7 @@
   border: none;
 }
 
-.positionDropDown {
+/* .positionDropDown {
   position: fixed;
   top: 0;
   left: 0; 
@@ -102,4 +101,4 @@
 .categoriesContainer {
   position: sticky;
   z-index: 0;
-}
+} */

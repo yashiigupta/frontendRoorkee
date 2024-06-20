@@ -10,7 +10,7 @@ import { MdCurrencyRupee } from "react-icons/md";
 import Categories from "./Categories";
 import DropdownMenu from "./DropdownMenu";
 import DepartmentDropdownMenu from "./DepartmentDropDown";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 
 export default function Schemes() {
   const [dropDownOpen, setDropDownOpen] = useState(false);

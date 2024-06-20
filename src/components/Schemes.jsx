@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Model from '@/pages/model';
 import { FaBuilding, FaMapMarkerAlt, FaUserTie, FaVenusMars, FaSortAmountDown, FaNetworkWired, FaCalendarAlt } from 'react-icons/fa';
+import { RiFundsBoxFill } from "react-icons/ri";
 import { MdCurrencyRupee } from "react-icons/md";
 import Categories from "./Categories";
 import DropdownStates from "./DropdownStates";
@@ -74,7 +75,6 @@ export default function Schemes() {
   // Toggle functions for each dropdown
   const toggleStateDropdown = () => {
     setShowStateDropdown(!showStateDropdown);
-    // Close other dropdowns if open
     setShowDepartmentDropdown(false);
     setShowOccupationDropdown(false);
     setShowBeneficiariesDropdown(false);
@@ -87,7 +87,6 @@ export default function Schemes() {
 
   const toggleDepartmentDropdown = () => {
     setShowDepartmentDropdown(!showDepartmentDropdown);
-    // Close other dropdowns if open
     setShowStateDropdown(false);
     setShowOccupationDropdown(false);
     setShowBeneficiariesDropdown(false);
@@ -100,7 +99,6 @@ export default function Schemes() {
 
   const toggleOccupationDropdown = () => {
     setShowOccupationDropdown(!showOccupationDropdown);
-    // Close other dropdowns if open
     setShowStateDropdown(false);
     setShowDepartmentDropdown(false);
     setShowBeneficiariesDropdown(false);
@@ -113,7 +111,6 @@ export default function Schemes() {
 
   const toggleBeneficiariesDropdown = () => {
     setShowBeneficiariesDropdown(!showBeneficiariesDropdown);
-    // Close other dropdowns if open
     setShowStateDropdown(false);
     setShowDepartmentDropdown(false);
     setShowOccupationDropdown(false);
@@ -126,7 +123,6 @@ export default function Schemes() {
 
   const toggleGenderDropdown = () => {
     setShowGenderDropdown(!showGenderDropdown);
-    // Close other dropdowns if open
     setShowStateDropdown(false);
     setShowDepartmentDropdown(false);
     setShowOccupationDropdown(false);
@@ -139,7 +135,6 @@ export default function Schemes() {
 
   const toggleAgeDropdown = () => {
     setShowAgeDropdown(!showAgeDropdown);
-    // Close other dropdowns if open
     setShowStateDropdown(false);
     setShowDepartmentDropdown(false);
     setShowOccupationDropdown(false);
@@ -152,7 +147,6 @@ export default function Schemes() {
 
   const toggleIncomeDropdown = () => {
     setShowIncomeDropdown(!showIncomeDropdown);
-    // Close other dropdowns if open
     setShowStateDropdown(false);
     setShowDepartmentDropdown(false);
     setShowOccupationDropdown(false);
@@ -165,7 +159,6 @@ export default function Schemes() {
 
   const toggleSponshershipDropdown = () => {
     setShowSponshershipDropdown(!showSponshershipDropdown);
-    // Close other dropdowns if open
     setShowStateDropdown(false);
     setShowDepartmentDropdown(false);
     setShowOccupationDropdown(false);
@@ -178,7 +171,6 @@ export default function Schemes() {
 
   const toggleSortingDropdown = () => {
     setShowDropdownShort(!showDropdownShort);
-    // Close other dropdowns if open
     setShowStateDropdown(false);
     setShowDepartmentDropdown(false);
     setShowOccupationDropdown(false);
@@ -249,7 +241,7 @@ export default function Schemes() {
 
             <button ref={sponshershipDropdownRef} onClick={toggleSponshershipDropdown} className="mb-2 mr-2 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
               <span className="flex items-center">
-                <MdCurrencyRupee className="text-gray-600 text-lg mr-1" /> Sponshership
+                <RiFundsBoxFill className="text-gray-600 text-lg mr-1" /> Sponshership
               </span>
             </button>
 

@@ -1,70 +1,70 @@
-// import dummytata from "/Users/monukumar/frontend-roorkee/src/dummyData.json"
-import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import {
-  FaMapMarkerAlt,
   FaBuilding,
+  FaMapMarkerAlt,
+  FaNetworkWired,
   FaUserTie,
   FaVenusMars,
 } from "react-icons/fa";
 import { MdCurrencyRupee } from "react-icons/md";
+import { RiFundsBoxFill } from "react-icons/ri";
+import dummyData from "../../dummyData.json";
 
-const Model = ({ isVisible, onClose }) => {
+const Modal = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
-
   const handleClose = (e) => {
     if (e.target.id === "closeAnyWhere") onClose();
   };
 
   const router = useRouter();
 
-  const states = [
-    "Andhra Pradesh",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chhattisgarh",
-    "Goa",
-    "Gujarat",
-    "Haryana",
-    "Himachal Pradesh",
-    "Jharkhand",
-    "Karnataka",
-    "Kerala",
-    "Madhya Pradesh",
-    "Maharashtra",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Odisha (Orissa)",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "Tamil Nadu",
-    "Telangana",
-    "Tripura",
-    "Uttar Pradesh",
-    "Uttarakhand",
-    "West Bengal",
-    "Andaman and Nicobar Islands",
-    "Chandigarh",
-    "Dadra and Nagar Haveli and Daman and Diu",
-    "Lakshadweep",
-    "Delhi (National Capital Territory of Delhi)",
-    "Puducherry",
-    "Jammu and Kashmir",
-    "Ladakh",
+  // States
+  const [states, setStates] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [beneficiaries, setBeneficiaries] = useState([]);
+  const [sponsorship, setSponsorship] = useState([]);
+  const genders = ["Male", "Female", "Other", "No specific Gender"];
+  const incomeRanges = [
+    "Below ₹10,000",
+    "₹10,000 - ₹20,000",
+    "₹20,000 - ₹30,000",
+    "₹30,000 - ₹40,000",
+    "Above ₹40,000",
   ];
-  const departments = ["Health", "Education", "Finance", "Agriculture"];
   const occupations = ["Farmer", "Government-Jobs", "Leader"];
-  const gender = ["Male", "Female", "Others"];
-  const income = [
-    "₹ 0-10000",
-    "₹ 10000-50000",
-    "₹ 50000-100000",
-    "above ₹ 100000",
-  ];
+
+  useEffect(() => {
+    // Filtering out schemes without a state
+    const filteredData = dummyData.filter((item) => item.state);
+    // Extracting unique states from filtered data
+    const uniqueStates = [...new Set(filteredData.map((item) => item.state))];
+    setStates(uniqueStates);
+  }, []);
+
+  useEffect(() => {
+    // Extracting departments from dummyData
+    const uniqueDepartments = [
+      ...new Set(dummyData.map((item) => item.department)),
+    ];
+    setDepartments(uniqueDepartments);
+  }, []);
+
+  useEffect(() => {
+    // Extracting beneficiaries from dummyData
+    const uniqueBeneficiaries = [
+      ...new Set(dummyData.map((item) => item.scheme_beneficiary)),
+    ];
+    setBeneficiaries(uniqueBeneficiaries);
+  }, []);
+
+  useEffect(() => {
+    // Extracting sponsorship from dummyData
+    const uniqueSponsorship = [
+      ...new Set(dummyData.map((item) => item.sponsors)),
+    ];
+    setSponsorship(uniqueSponsorship);
+  }, []);
 
   const [category, setCategory] = useState("states");
   const [selectedFilters, setSelectedFilters] = useState([]);
@@ -85,41 +85,50 @@ const Model = ({ isVisible, onClose }) => {
     );
   };
 
-  const renderItems = () => {
-    let items;
-    switch (category) {
-      case "states":
-        items = states;
-        break;
-      case "departments":
-        items = departments;
-        break;
-      case "gender":
-        items = gender;
-        break;
-      case "occupations":
-        items = occupations;
-        break;
-      case "income":
-        items = income;
-        break;
-      default:
-        items = [];
-    }
+const renderItems = () => {
+  let items;
+  switch (category) {
+    case "states":
+      items = states;
+      break;
+    case "departments":
+      items = departments;
+      break;
+    case "gender":
+      items = genders;
+      break;
+    case "occupations":
+      items = occupations;
+      break;
+    case "income":
+      items = incomeRanges;
+      break;
+    case "beneficiaries":
+      items = beneficiaries;
+      break;
+    case "sponsorship":
+      items = sponsorship;
+      break;
+    default:
+      items = [];
+  }
 
-    return items.map((item) => (
-      <div key={item} className="flex gap-3 mb-[20px] ">
-        <input
-          type="checkbox"
-          id={item}
-          name={item}
-          checked={selectedFilters.includes(item)}
-          onChange={() => handleCheckboxChange(item)}
-        />
-        <p className="text-red">{item}</p>
-      </div>
-    ));
-  };
+  return items.map((item) => (
+    <div key={item} className="flex gap-3 mb-[20px]">
+      <input
+        type="checkbox"
+        id={item}
+        name={item}
+        checked={selectedFilters.includes(item)}
+        onChange={() => handleCheckboxChange(item)}
+      />
+      <label htmlFor={item} className="ml-2">
+        {item}
+      </label>
+    </div>
+  ));
+};
+
 
   const handleGoBack = () => {
     onClose(); // This will go back to the previous page
@@ -140,13 +149,14 @@ const Model = ({ isVisible, onClose }) => {
       id="closeAnyWhere"
       onClick={handleClose}
     >
-      <div className="w-[700px] h-[500px] bg-white text-black flex flex-col justify-center items-center relative rounded-lg">
+      <div className="w-full h-full bg-white text-black flex flex-col justify-center items-center relative rounded-lg">
         {/* Main Div */}
         <div className="flex w-full h-full">
           {/* Left Column */}
           <div className="w-[200px] p-[30px] bg-gray-100">
             <div className="mb-4">
               <div className="flex flex-col">
+
                 <div
                   className={buttonClasses("states")}
                   onClick={() => handleCategoryChange("states")}
@@ -160,6 +170,7 @@ const Model = ({ isVisible, onClose }) => {
                     State
                   </button>
                 </div>
+
                 <div
                   className={buttonClasses("departments")}
                   onClick={() => handleCategoryChange("departments")}
@@ -175,6 +186,7 @@ const Model = ({ isVisible, onClose }) => {
                     Department
                   </button>
                 </div>
+
                 <div
                   className={buttonClasses("occupations")}
                   onClick={() => handleCategoryChange("occupations")}
@@ -188,6 +200,7 @@ const Model = ({ isVisible, onClose }) => {
                     Occupation
                   </button>
                 </div>
+
                 <div
                   className={buttonClasses("gender")}
                   onClick={() => handleCategoryChange("gender")}
@@ -201,6 +214,7 @@ const Model = ({ isVisible, onClose }) => {
                     Gender
                   </button>
                 </div>
+
                 <div
                   className={buttonClasses("income")}
                   onClick={() => handleCategoryChange("income")}
@@ -216,6 +230,39 @@ const Model = ({ isVisible, onClose }) => {
                     Income
                   </button>
                 </div>
+
+                <div
+                  className={buttonClasses("beneficiaries")}
+                  onClick={() => handleCategoryChange("beneficiaries")}
+                >
+                  <FaNetworkWired
+                    className={`mr-3 ${iconClasses("beneficiaries")}`}
+                  />
+                  <button
+                    className={`button transition-colors ${iconClasses(
+                      "beneficiaries"
+                    )}`}
+                  >
+                    Beneficiaries
+                  </button>
+                </div>
+
+                <div
+                  className={buttonClasses("sponsorship")}
+                  onClick={() => handleCategoryChange("sponsorship")}
+                >
+                  <RiFundsBoxFill
+                    className={`mr-3 ${iconClasses("sponsorship")}`}
+                  />
+                  <button
+                    className={`button transition-colors ${iconClasses(
+                      "sponsorship"
+                    )}`}
+                  >
+                    Sponsorship
+                  </button>
+                </div>
+
               </div>
             </div>
           </div>
@@ -254,15 +301,13 @@ const Model = ({ isVisible, onClose }) => {
             </div>
 
             {/* Third Div */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full sm:w-auto max-w-[90%] sm:max-w-none">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full sm:w-auto max-w-[80%] sm:max-w-none">
               <div className="w-full sm:w-auto px-4 sm:px-8 py-2 bg-black text-white flex justify-center items-center rounded-lg">
                 <button className="w-full sm:w-auto button font-bold hover:bg-gray-800 transition-colors">
                   Apply Filter
                 </button>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
@@ -270,4 +315,4 @@ const Model = ({ isVisible, onClose }) => {
   );
 };
 
-export default Model;
+export default Modal;

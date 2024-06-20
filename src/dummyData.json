@@ -295,6 +295,7 @@
     "scheme_link": "https://meghalaya.gov.in/schemes/content/37228"
   },
   {
+    "state" : "Bihar",
     "scheme_id": "1436209d-16e0-4d06-9783-650562e6551c",
     "department": "Fisheries Department",
     "scheme_name": "Establishment of fish hatcheries",
@@ -469,6 +470,7 @@
     "scheme_link": "https://meghalaya.gov.in/schemes/content/37395"
   },
   {
+    "state" : "Bihar",
     "scheme_id": "e5d4821d-598e-487f-94a2-9ac5a9e90e82",
     "department": "Arts & Culture Department",
     "scheme_name": "Guru Shishya Parampara Scheme",
@@ -496,6 +498,7 @@
     "scheme_link": "https://meghalaya.gov.in/schemes/content/15648"
   },
   {
+    "state" : "Bihar",
     "scheme_id": "03a256fc-08ea-4095-ba5e-a39a33b5832e",
     "department": "Social Welfare Department",
     "scheme_name": "Incentive Award to AWW/AWH under POSHAN Abhiyaan",

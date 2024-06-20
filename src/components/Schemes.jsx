@@ -2,75 +2,60 @@ import Model from '@/pages/model';
 import { useState } from 'react';
 import { FaBuilding, FaMapMarkerAlt, FaUserTie, FaVenusMars } from 'react-icons/fa';
 import { IoArrowBackOutline } from "react-icons/io5";
+import { FiMapPin } from "react-icons/fi";
+import { TbBuilding } from "react-icons/tb";
+import { TfiBag } from "react-icons/tfi";
+import { BsGenderFemale } from "react-icons/bs";
 import { MdCurrencyRupee } from "react-icons/md";
 import Categories from "./Categories";
+import DropdownMenu from "./DropdownMenu";
+import DepartmentDropdownMenu from "./DepartmentDropDown";
+import React, { useState, useRef, useEffect } from "react";
 
 export default function Schemes() {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [dropDownOpen, setDropDownOpen] = useState(false);
+  const [departmentOpen, setDepartmentOpen] = useState(false);
+
+  const dropdownRef = useRef();
+  const departmentDropdownRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropDownOpen(false);
+      }
+      if (departmentDropdownRef.current && !departmentDropdownRef.current.contains(event.target)) {
+        setDepartmentOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   
-  const handleStateClick = () => {
-    setSelectedCategory('states');
-  };
-  const handleDepartmentClick = () => {
-    setSelectedCategory('departments');
-  };
-  const handleOccupationClick = () => {
-    setSelectedCategory('occupations');
-  };
-  const handleGenderClick = () => {
-    setSelectedCategory('gender');
-  };
-  const handleIncomeClick = () => {
-    setSelectedCategory('income');
-  };
-
-  const handleCloseModal = () => {
-    setSelectedCategory(null); // Reset selected category when closing modal
-  };
-
   return (
-    <>
-      <div className="bg-white font-sans">
-        <button className="flex items-center justify-between p-0 border-none mb-5 text-base bg-white">
-          <IoArrowBackOutline className="mr-1 text-xl" /> Back
-        </button>
-        <div className="flex justify-between flex-wrap">
-          <h1 className="mt-0 mb-4 text-[30px] font-semibold">Schemes</h1>
-          <div>
-            <button className="font-semibold p-2 rounded-lg border border-gray-300 bg-white mr-2">Regional Language</button>
-            <button className="font-semibold p-2 rounded-lg border border-gray-300 bg-white px-7">English</button>
-          </div>
+      <div className={styles.schemesContainer}>
+      <button className = {styles.backBtn}><IoArrowBackOutline className = {styles.backArrow}/> Back</button>
+      <div className={styles.schemesSection}>
+        <h1 className={styles.heading}>Schemes</h1>
+        <div>
+          <button className={styles.langBtn}>Regional Language</button>
+          <button className={styles.engBtn}>English</button>
         </div>
-        <div className="max-w-lg w-full flex flex-wrap justify-between mb-14">
-          <button className="mb-2 p-2 rounded-[18px] border border-gray-300 bg-white hover:bg-gray-100" onClick={handleStateClick}>
-            <span className="flex items-center">
-              <FaMapMarkerAlt className="text-gray-600 mr-1" /> State
-            </span>
-          </button>
-          <button className="mb-2 p-2 rounded-[18px] border border-gray-300 bg-white hover:bg-gray-100" onClick={handleDepartmentClick}>
-            <span className="flex items-center">
-              <FaBuilding className="text-gray-600 mr-1" /> Department
-            </span>
-          </button>
-          <button className="mb-2 p-2 rounded-[18px] border border-gray-300 bg-white hover:bg-gray-100" onClick={handleOccupationClick}>
-            <span className="flex items-center">
-              <FaUserTie className="text-gray-600 mr-1" /> Occupation
-            </span>
-          </button>
-          <button className="mb-2 p-2 rounded-[18px] border border-gray-300 bg-white hover:bg-gray-100" onClick={handleGenderClick}>
-            <span className="flex items-center">
-              <FaVenusMars className="text-gray-600 mr-1" /> Gender
-            </span>
-          </button>
-          <button className="mb-2 p-2 rounded-[18px] border border-gray-300 bg-white hover:bg-gray-100" onClick={handleIncomeClick}>
-            <span className="flex items-center">
-              <MdCurrencyRupee className="text-gray-600 text-lg mr-1 npm" /> Income
-            </span>
-          </button>
-        </div>
-        <Categories />
       </div>
-      <Model isVisible={selectedCategory !== null} category={selectedCategory} onClose={handleCloseModal}/>
-    </>
+      <div className={styles.buttons}>
+        <button className={styles.checkBtn} onClick = {() => setDropDownOpen(!dropDownOpen)}><FiMapPin className={styles.checkIcons}/> State</button>
+        <button className={styles.checkBtn} onClick={() => setDepartmentOpen(!departmentOpen)}><TbBuilding className={styles.checkIcons}/> Department</button>
+        <button className={styles.checkBtn}><TfiBag className={styles.checkIcons}/> Occupation</button>
+        <button className={styles.checkBtn}><BsGenderFemale className={styles.checkIcons}/> Gender</button>
+        <button className={styles.checkBtn}><MdCurrencyRupee className={styles.checkIcons}/> Income</button>
+        </div>
+
+      {dropDownOpen && <DropdownMenu ref={dropdownRef} />}
+      {departmentOpen && <DepartmentDropdownMenu ref={departmentDropdownRef} />}
+      <Categories />
+    </div>
   );
 }

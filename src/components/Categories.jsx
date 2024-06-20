@@ -1,20 +1,28 @@
 import styles from '../styles/schemes.module.css';
 import dummyData from '../dummyData.json';
 
-const scheme_names = dummyData.map(item => item);
-const uniqueSchemeNames = [...new Set(scheme_names)];
-export default function Categories()
-{
-  return (
-    <div className={styles.categoriesContainer}>
-      {scheme_names.map(item => {
-        return (
-            <div>
-              <p className={styles.item}>{item.scheme_name}</p>
-              <hr className={styles.horizontalRule}></hr>
-            </div>
-          );
-      })}
-    </div>
-  );
+export default function Categories(props) {
+  if (props.selectedDepartments.length === 0) {
+    return (
+      <div className={styles.categoriesContainer}>
+        {dummyData.map(item => (
+          <div key={item.scheme_name}>
+            <p className={styles.item}>{item.scheme_name}</p>
+            <hr className={styles.horizontalRule} />
+          </div>
+        ))}
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.categoriesContainer}>
+        {dummyData.filter(item => props.selectedDepartments.includes(item.category)).map(item => (
+          <div key={item.scheme_name}>
+            <p className={styles.item}>{item.scheme_name}</p>
+            <hr className={styles.horizontalRule} />
+          </div>
+        ))}
+      </div>
+    );
+  }
 }

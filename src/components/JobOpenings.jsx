@@ -32,7 +32,7 @@ export default function JobOpenings()
         <button className={styles.checkBtn}><BsGenderFemale className={styles.checkIcons}/> Gender</button>
         <button className={styles.checkBtn}><MdCurrencyRupee className={styles.checkIcons}/> Income</button>
       </div>
-      <Model isVisible={selectedCategory !== null} category={selectedCategory} onClose={handleCloseModal}/>
+      {/* <Model isVisible={selectedCategory !== null} category={selectedCategory} onClose={handleCloseModal}/> */}
     </>
   );
 }

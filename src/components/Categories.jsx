@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import dummyData from '../dummyData.json';
+import styles from '../styles/schemes.module.css';
 
 const scheme_names = dummyData.map(item => item);
 const uniqueSchemeNames = [...new Set(scheme_names)];

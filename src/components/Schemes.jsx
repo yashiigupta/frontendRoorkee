@@ -11,6 +11,7 @@ import Categories from "./Categories";
 import DropdownMenu from "./DropdownMenu";
 import DepartmentDropdownMenu from "./DepartmentDropDown";
 import React, { useRef, useEffect } from "react";
+import styles from '../styles/schemes.module.css';
 
 export default function Schemes() {
   const [dropDownOpen, setDropDownOpen] = useState(false);
@@ -39,7 +40,7 @@ export default function Schemes() {
       <div className={styles.schemesContainer}>
       <button className = {styles.backBtn}><IoArrowBackOutline className = {styles.backArrow}/> Back</button>
       <div className={styles.schemesSection}>
-        <h1 className={styles.heading}>Schemes</h1>
+        <h1 className="mt-0 mb-4 text-[30px] font-semibold">Schemes</h1>
         <div>
           <button className={styles.langBtn}>Regional Language</button>
           <button className={styles.engBtn}>English</button>

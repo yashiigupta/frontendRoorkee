@@ -1,43 +1,21 @@
 import { useRouter } from 'next/router';
 import dummyData from '../dummyData.json';
+import styles from '../styles/schemes.module.css';
 
-const Categories = () => {
-  const router = useRouter();
-  const categories = dummyData.map(item => item.category);
-  const uniqueCategories = [...new Set(categories)];
-
-  const handleClick = (category) => {
-    const categoryData = dummyData.find(item => item.category === category);
-    if (categoryData) {
-      router.push({
-        pathname: '/content',
-        query: {
-          department: categoryData.category,
-          title: categoryData.scheme_name,
-          beneficiary_category: categoryData.beneficiary_category,
-          eligibility_criteria: categoryData.eligibility_criteria,
-        },
-      });
-    }
-  };
-
+const scheme_names = dummyData.map(item => item);
+const uniqueSchemeNames = [...new Set(scheme_names)];
+export default function Categories()
+{
   return (
-    <div>
-      {uniqueCategories.map(item => (
-        <div key={item}>
-          <p 
-            className="mt-5 mb-5 text-base cursor-pointer "
-            onClick={() => handleClick(item)}
-            role="button"
-            tabIndex="0"
-          >
-            {item}
-          </p>
-          <hr className="h-px bg-gray-300 mb-5" />
-        </div>
-      ))}
+    <div className={styles.categoriesContainer}>
+      {scheme_names.map(item => {
+        return (
+            <div>
+              <p className={styles.item}>{item.scheme_name}</p>
+              <hr className={styles.horizontalRule}></hr>
+            </div>
+          );
+      })}
     </div>
   );
-};
-
-export default Categories;
+}

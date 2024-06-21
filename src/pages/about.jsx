@@ -20,7 +20,7 @@ export default function ShowDetails()
       <div className={styles.schemesContainer}>
         <button className = {styles.backBtn} onClick = {handleBack}><IoArrowBackOutline className = {styles.backArrow}/> Back</button>
         <div className={styles.schemesSection}>
-          <p className={styles.heading}>{parsedData.scheme_name}</p>
+          <p className={styles.heading}>{parsedData ? parsedData.scheme_name : 'Loading...'}</p>
           <div>
             <button className={styles.engBtn}><GoShareAndroid className = {styles.shareBtn} />Share scheme</button>
           </div>
@@ -30,32 +30,32 @@ export default function ShowDetails()
             {parsedData && (<div>
               <div className={styles.details}>
                 <p className = {styles.itemCategory}>Department</p>
-                <p className={styles.item}>{parsedData.category}</p>
+                <p className={styles.item}>{parsedData ? parsedData.category : 'Loading...'}</p>
               </div>
               <hr className={styles.horizontalRule} />
               <div className={styles.details}>
                 <p className = {styles.itemCategory}>Beneficiaries</p>
-                <p className={styles.item}>{parsedData.beneficiary_category}</p>
+                <p className={styles.item}>{parsedData ? parsedData.beneficiary_category : 'Loading...'}</p>
               </div>
               <hr className={styles.horizontalRule} />
               <div className={styles.details}>
                 <p className = {styles.itemCategory}>Description</p>
-                <p className={styles.item}>{parsedData.scheme_objective}</p>
+                <p className={styles.item}>{parsedData ? parsedData.scheme_objective : 'Loading...'}</p>
               </div>
               <hr className={styles.horizontalRule} />
               <div className={styles.details}>
                 <p className = {styles.itemCategory}>Eligiblity Criteria</p>
                 <ul className={styles.eligiblityList}>
-                  <li className={styles.eligiblityItems}>Income: {parsedData.eligibility_criteria.Income}</li>
-                  <li className={styles.eligiblityItems}>Age: {parsedData.eligibility_criteria.Age}</li>
-                  <li className={styles.eligiblityItems}>Community: {parsedData.eligibility_criteria.Community}</li>
-                  <li className={styles.eligiblityItems}>OtherDetails: {parsedData.eligibility_criteria.OtherDetails}</li>
+                  <li className={styles.eligiblityItems}>Income: {parsedData ? parsedData.eligibility_criteria.Income : 'Loading...'}</li>
+                  <li className={styles.eligiblityItems}>Age: {parsedData ? parsedData.eligibility_criteria.Age : 'Loading...'}</li>
+                  <li className={styles.eligiblityItems}>Community: {parsedData ? parsedData.eligibility_criteria.Community : 'Loading...'}</li>
+                  <li className={styles.eligiblityItems}>OtherDetails: {parsedData ? parsedData.eligibility_criteria.OtherDetails : 'Loading...'}</li>
                 </ul>
               </div>
               <hr className={styles.horizontalRule} />
               <div className={styles.details}>
-                <p className = {styles.itemCategory}>Sponsored by</p>
-                <p className={styles.item}>{parsedData.funding_by}</p>
+                <p className = {parsedData ? styles.itemCategory : 'Loading...'}>Sponsored by</p>
+                <p className={styles.item}>{parsedData ? parsedData.funding_by : 'Loading...'}</p>
               </div>
             <hr className={styles.horizontalRule} />
           </div>)}

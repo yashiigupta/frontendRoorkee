@@ -38,6 +38,7 @@
   border: 1px solid rgb(221, 218, 218);
   background-color: #ffffff;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .engBtn {
@@ -46,6 +47,11 @@
   border-radius: 8px;
   border: 1px solid rgb(221, 218, 218);
   background-color: #ffffff;
+  cursor: pointer;
+}
+
+.langBtn:hover, .engBtn:hover {
+  background-color: rgb(244, 244, 244);
 }
 
 .buttons {
@@ -64,6 +70,7 @@
   border-radius: 10px;
   border: 1px solid rgb(221, 218, 218);
   background-color: #ffffff;
+  cursor: pointer;
 }
 
 .checkBtn:hover {
@@ -83,6 +90,7 @@
   margin-top: 30px;
   font-size: 1rem;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 
 .horizontalRule {
@@ -90,15 +98,3 @@
   background-color: rgb(221, 218, 218);
   border: none;
 }
-
-/* .positionDropDown {
-  position: fixed;
-  top: 0;
-  left: 0; 
-  z-index: 10; 
-}
-
-.categoriesContainer {
-  position: sticky;
-  z-index: 0;
-} */

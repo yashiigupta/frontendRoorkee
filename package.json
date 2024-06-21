@@ -8,9 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "autoprefixer": "^9.8.8",
-    "next": "^12.0.4",
-    "postcss": "^7.0.39",
+    "next": "14.2.4",
+    "primeflex": "^3.3.1",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.6.6",
     "react": "^18",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",

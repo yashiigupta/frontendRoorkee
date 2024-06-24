@@ -1,6 +1,8 @@
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import styles from '../styles/tabs.module.css';
+import BackButton from "./BackButton";
+
 
 export default function Tabs(props) {
   const [isDesktop, setIsDesktop] = useState(true);
@@ -20,10 +22,13 @@ export default function Tabs(props) {
   }, []);
 
   return (
+    <>
+    <BackButton/>
     <div className={styles.tabsSection}>
       <button className={styles.tabBtn} onClick={() => props.setComponent("Schemes")}>Schemes</button>
       <button className={styles.tabBtn} onClick={() => props.setComponent("Job Openings")}>Job Openings</button>
       <button className={styles.tabBtn} onClick={() => props.setComponent("Scholarships")}>Scholarships</button>
     </div>
+    </>
   )
 }

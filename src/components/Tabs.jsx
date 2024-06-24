@@ -3,32 +3,12 @@ import { useState, useEffect } from "react";
 import styles from '../styles/tabs.module.css';
 import BackButton from "./BackButton";
 
-
 export default function Tabs(props) {
-  const [isDesktop, setIsDesktop] = useState(true);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth > 768); // Adjust breakpoint as needed
-    };
-
-    checkScreenSize(); // Check initial screen size
-
-    window.addEventListener("resize", checkScreenSize);
-
-    return () => {
-      window.removeEventListener("resize", checkScreenSize);
-    };
-  }, []);
-
   return (
-    <>
-    <BackButton/>
-    <div className={styles.tabsSection}>
-      <button className={styles.tabBtn} onClick={() => props.setComponent("Schemes")}>Schemes</button>
-      <button className={styles.tabBtn} onClick={() => props.setComponent("Job Openings")}>Job Openings</button>
-      <button className={styles.tabBtn} onClick={() => props.setComponent("Scholarships")}>Scholarships</button>
+    <div className="mt-5 flex justify-center items-center mb-5">
+      <button className="flex-grow text-center font-sm py-3 px-7 rounded-md border-none text-sm bg-gray-100 cursor-pointer hover:bg-button-blue hover:text-white font-sans" onClick={() => props.setComponent("Schemes")}>Schemes</button>
+      <button className="flex-grow text-center font-sm py-3 px-7 rounded-md border-none text-sm bg-gray-100 cursor-pointer hover:bg-button-blue hover:text-white font-sans" onClick={() => props.setComponent("Job Openings")}>Job Openings</button>
+      <button className="flex-grow text-center font-sm py-3 px-7 rounded-md border-none text-sm bg-gray-100 cursor-pointer hover:bg-button-blue hover:text-white font-sans" onClick={() => props.setComponent("Scholarships")}>Scholarships</button>
     </div>
-    </>
   )
 }

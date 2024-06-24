@@ -16,9 +16,7 @@ export default function Home() {
   }, [component]);
 
   return (
-    <div>
-    <MainPage/>
-    <div style={{ maxWidth: '90%', margin: '0 auto' }}>
+    <div style={{ maxWidth: '80%', margin: '0 auto' }}>
       <div>
         <div>
           <Tabs setComponent={setComponent} />
@@ -27,7 +25,6 @@ export default function Home() {
           {componentToRender}
         </div>
       </div>
-    </div>
     </div>
   );
 }

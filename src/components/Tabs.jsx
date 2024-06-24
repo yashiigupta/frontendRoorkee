@@ -1,3 +1,8 @@
+import { IoArrowBackOutline } from "react-icons/io5";
+import { useState, useEffect } from "react";
+import styles from '../styles/tabs.module.css';
+import BackButton from "./BackButton";
+
 export default function Tabs(props) {
   return (
     <div className="mt-5 flex justify-center items-center mb-5">

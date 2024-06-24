@@ -3,6 +3,7 @@ import Schemes from "@/components/Schemes";
 import Scholarships from "@/components/Scholarships";
 import JobOpenings from "@/components/JobOpenings";
 import { useState, useEffect } from 'react';
+import MainPage from "../components/HeroPanel";
 
 export default function Home() {
   const [component, setComponent] = useState("Schemes");

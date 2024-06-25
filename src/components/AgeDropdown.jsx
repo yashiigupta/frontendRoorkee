@@ -1,22 +1,41 @@
-import React, { forwardRef } from 'react';
+import dummyData from '../dummyData.json';
+import React, { useEffect } from 'react';
 
-// Example age ranges (lower and upper ages)
-const ageRanges = [
-  { lower: 0, upper: 18 },
-  { lower: 19, upper: 30 },
-  { lower: 31, upper: 45 },
-  { lower: 46, upper: 60 },
-  { lower: 61, upper: "above" }, // Example for 61 and above
-];
+const categories = dummyData.map(item => item.eligibility_criteria.Age);
+const uniqueCategories = [...new Set(categories)];
 
-const DropdownAge = forwardRef((props, ref) => {
+const AgeDropdownMenu = React.forwardRef(({ selectedAges, setSelectedAges }, ref) => {
+  const beneficiariesTop = document.getElementById('ageBtn').getBoundingClientRect().top + window.scrollY;
+  const beneficiariesLeft = document.getElementById('ageBtn').getBoundingClientRect().left + window.scrollX;
+
+  const handleOptionChange = (event) => {
+    const { checked, value } = event.target;
+    setSelectedAges(prevOptions => {
+      if (checked) {
+        return [...prevOptions, value];
+      } else {
+        return prevOptions.filter(option => option !== value);
+      }
+    });
+  };
+
+  useEffect(() => {
+    console.log(selectedAges);
+  }, [selectedAges]);
+
   return (
-    <div className="absolute ml-[610px] mt-[-30px] bg-[rgb(251,251,251)] rounded-[12px] max-w-[600px] flex flex-col" ref={ref}>
-      <ul className="flex flex-col font-sans list-none px-[23px] text-[14px]">
-        {ageRanges.map((range, index) => (
-          <li key={index} className="flex items-center my-[14px]">
-            <input type="checkbox" className="relative top-[1.5px] mr-[7px]" />
-            {`${range.lower}-${range.upper}`}
+    <div  style={{ top: `${beneficiariesTop + 42}px`, left:  `${beneficiariesLeft}px`}} className="absolute bg-[rgb(251,251,251)] rounded-lg w-auto max-w-[600px] flex flex-col whitespace-wrap z-50" ref={ref}>
+      <ul className="flex flex-col font-sans list-none p-[0px_23px] text-xs">
+        {uniqueCategories.map(item => (
+          <li key={item} className="my-[12px] flex items-center">
+            <input 
+              type="checkbox" 
+              value={item} 
+              onChange={handleOptionChange}
+              checked={selectedAges.includes(item)} // Set checked property
+              className="relative top-[1.5px] mr-2"
+            />
+            {item}
           </li>
         ))}
       </ul>
@@ -24,4 +43,4 @@ const DropdownAge = forwardRef((props, ref) => {
   );
 });
 
-export default DropdownAge;
+export default AgeDropdownMenu;

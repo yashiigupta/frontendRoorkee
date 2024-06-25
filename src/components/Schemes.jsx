@@ -2,23 +2,43 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { GoSortDesc } from "react-icons/go";
 import { FiMapPin } from "react-icons/fi";
 import { BsBuilding } from "react-icons/bs";
-import { LiaBriefcaseSolid } from "react-icons/lia";
+import { IoIosPeople } from "react-icons/io";
+// import { LiaBriefcaseSolid } from "react-icons/lia";
 import { PiGraduationCap } from "react-icons/pi";
-import { PiBriefcaseLight } from "react-icons/pi";
+import { MdCurrencyRupee } from "react-icons/md";
+// import { PiBriefcaseLight } from "react-icons/pi";
+import { CiBank } from "react-icons/ci";
 import { BsPeople } from "react-icons/bs";
 import { IoNewspaperOutline } from "react-icons/io5";
 import React, { useState, useRef, useEffect } from "react";
 import Categories from "./Categories";
 import DropdownMenu from "./DropdownMenu";
 import DepartmentDropdownMenu from "./DepartmentDropDown";
+import BeneficiaryDropdownMenu from "./BeneficiariesDropdown";
+import AgeDropdownMenu from "./AgeDropdown";
+import IncomeDropdownMenu from "./IncomeDropdown";
+import FundingByDropdownMenu from "./FundingBy";
 
 export default function Schemes() {
   const [selectedDepartments, setSelectedDepartments] = useState([]);
+  const [selectedBeneficiaries, setSelectedBeneficiaries] = useState([]);
+  const [selectedAges, setSelectedAges] = useState([]);
+  const [selectedIncomes, setSelectedIncomes] = useState([]);
+  const [selectedFunders, setSelectedFunders] = useState([]);
+
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const [departmentOpen, setDepartmentOpen] = useState(false);
+  const [beneficiaryOpen, setBeneficiaryOpen] = useState(false);
+  const [ageOpen, setAgeOpen] = useState(false);
+  const [incomeOpen, setIncomeOpen] = useState(false);
+  const [fundersOpen, setFundersOpen] = useState(false);
 
   const dropdownRef = useRef();
   const departmentDropdownRef = useRef();
+  const beneficiaryDropdownRef = useRef();
+  const ageDropdownRef = useRef();
+  const incomeDropdownRef = useRef();
+  const funderDropdownRef = useRef();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -27,6 +47,18 @@ export default function Schemes() {
       }
       if (departmentDropdownRef.current && !departmentDropdownRef.current.contains(event.target)) {
         setDepartmentOpen(false);
+      }
+      if (beneficiaryDropdownRef.current && !beneficiaryDropdownRef.current.contains(event.target)) {
+        setBeneficiaryOpen(false);
+      }
+      if (ageDropdownRef.current && !ageDropdownRef.current.contains(event.target)) {
+        setAgeOpen(false);
+      }
+      if (incomeDropdownRef.current && !incomeDropdownRef.current.contains(event.target)) {
+        setIncomeOpen(false);
+      }
+      if (funderDropdownRef.current && !funderDropdownRef.current.contains(event.target)) {
+        setFundersOpen(false);
       }
     };
 
@@ -37,317 +69,50 @@ export default function Schemes() {
   }, []);
 
   const handleDropdownClick = () => {
-    setDepartmentOpen(false);
     setDropDownOpen(!dropDownOpen);
   };
 
   const handleDepartmentClick = () => {
-    setDropDownOpen(false);
     setDepartmentOpen(!departmentOpen);
   };
+
+  const handleBeneficiariesClick = () => {
+    setBeneficiaryOpen(!beneficiaryOpen);
+  }
+
+  const handleAgeClick = () => {
+    setAgeOpen(!ageOpen);
+  }
+
+  const handleIncomeClick = () => {
+    setIncomeOpen(!incomeOpen);
+  }
+
+  const handleFundersClick = () => {
+    setFundersOpen(!fundersOpen);
+  }
+
   return (
     <div className="bg-white font-sans mt-9">
       <h1 className="mt-0 mb-6 font-semibold text-3xl">Schemes</h1>
       <div className="mt-0 w-full flex flex-wrap gap-3 mb-15 font-sans">
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick={handleDropdownClick}><GoSortDesc className="text-gray-400 text-lg mr-1.5"/> Sort</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick={handleDropdownClick}><FiMapPin className="text-gray-400 text-lg mr-1.5"/> State</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick={handleDepartmentClick}><BsBuilding className="text-gray-400 text-lg mr-1.5"/> Department</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200"><LiaBriefcaseSolid className="text-gray-400 text-xl mr-1.5"/> Job type</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200"><PiGraduationCap className="text-gray-400 text-xl mr-1.5"/> Education level</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200"><PiBriefcaseLight className="text-gray-400 text-xl mr-1.5"/>Experience</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200"><BsPeople className="text-gray-400 text-lg mr-1.5"/>Age</button>
+        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200"><GoSortDesc className="text-gray-400 text-lg mr-1.5"/> Sort</button>
+        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick={handleDropdownClick} id = "stateBtn"><FiMapPin className="text-gray-400 text-lg mr-1.5"/> State</button>
+        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick={handleDepartmentClick} id = "departmentBtn"><BsBuilding className="text-gray-400 text-lg mr-1.5 z-50"/> Department</button>
+        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick = {handleBeneficiariesClick} id = "beneficiaryBtn"><IoIosPeople className="text-gray-400 text-xl mr-1.5"/> Beneficiaries</button>
+        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick = {handleFundersClick} id = "fundingbyBtn"><CiBank className="text-gray-400 text-xl mr-1.5"/>Funding by</button>
+        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick = {handleIncomeClick} id = "incomeBtn"><MdCurrencyRupee className="text-gray-400 text-xl mr-1.5"/>Income</button>
+        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick = {handleAgeClick} id = "ageBtn"><BsPeople className="text-gray-400 text-lg mr-1.5"/>Age</button>
         <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200"><IoNewspaperOutline className="text-gray-400 text-lg mr-1.5"/>Application deadline</button>
       </div>
 
       {dropDownOpen && <DropdownMenu ref={dropdownRef} />}
       {departmentOpen && <DepartmentDropdownMenu ref={departmentDropdownRef} selectedDepartments={selectedDepartments} setSelectedDepartments={setSelectedDepartments} />}
-      <Categories selectedDepartments={selectedDepartments}/>
+      {beneficiaryOpen && <BeneficiaryDropdownMenu ref = {beneficiaryDropdownRef} selectedBeneficiaries = {selectedBeneficiaries} setSelectedBeneficiaries = {setSelectedBeneficiaries} />}
+      {ageOpen && <AgeDropdownMenu ref = {ageDropdownRef} selectedAges = {selectedAges} setSelectedAges = {setSelectedAges} />}
+      {incomeOpen && <IncomeDropdownMenu ref = {incomeDropdownRef} selectedIncomes = {selectedIncomes} setSelectedIncomes = {setSelectedIncomes} />}
+      {fundersOpen && <FundingByDropdownMenu ref = {funderDropdownRef} selectedFunders = {selectedFunders} setSelectedFunders = {setSelectedFunders} />}
+      <Categories selectedDepartments={selectedDepartments} selectedBeneficiaries = {selectedBeneficiaries} selectedAges = {selectedAges} selectedFunders = {selectedFunders} selectedIncomes = {selectedIncomes}/>
     </div>
   );
 }
-
-// import React, { useState, useEffect, useRef } from 'react';
-// import Model from '@/pages/model';
-// import { FaBuilding, FaMapMarkerAlt, FaUserTie, FaVenusMars, FaSortAmountDown, FaNetworkWired, FaCalendarAlt } from 'react-icons/fa';
-// import { RiFundsBoxFill } from "react-icons/ri";
-// import { MdCurrencyRupee } from "react-icons/md";
-// import styles from '../styles/schemes.module.css';
-// import Categories from "./Categories";
-// import DropdownStates from "./DropdownStates";
-// import DepartmentDropdownMenu from './DepartmentDropDown';
-// import DropdownOccupation from './OccupationDropDown';
-// import DropdownBenefecries from './BeneficiriesDropdown';
-// import DropdownGender from './GenderDropdown';
-// import DropdownAge from './AgeDropdown';
-// import DropdownIncome from './IncomeDropdown';
-// import DropdownSponshership from './SponshershipDropdown';
-// import DropdownShort from './SortDropdown';
-// import useOutsideClick from './OutsideClick';
-
-// export default function Schemes() {
-//   const [selectedCategory, setSelectedCategory] = useState(null);
-
-//   const handleCloseModal = () => {
-//     setSelectedCategory(null); // Reset selected category when closing modal
-//   };
-
-//   const handleFilterClick = () => {
-//     setSelectedCategory('filter');
-//   };
-
-//   const [isDesktop, setIsDesktop] = useState(true); // Assume desktop mode by default
-
-//   // Refs for each dropdown
-//   const stateDropdownRef = useRef(null);
-//   const departmentDropdownRef = useRef(null);
-//   const occupationDropdownRef = useRef(null);
-//   const beneficiariesDropdownRef = useRef(null);
-//   const genderDropdownRef = useRef(null);
-//   const ageDropdownRef = useRef(null);
-//   const incomeDropdownRef = useRef(null);
-//   const sponshershipDropdownRef = useRef(null);
-//   const sortingDropdownRef = useRef(null);
-
-//   // State variables to control dropdown visibility
-//   const [showStateDropdown, setShowStateDropdown] = useState(false);
-//   const [showDepartmentDropdown, setShowDepartmentDropdown] = useState(false);
-//   const [showOccupationDropdown, setShowOccupationDropdown] = useState(false);
-//   const [showBeneficiariesDropdown, setShowBeneficiariesDropdown] = useState(false);
-//   const [showGenderDropdown, setShowGenderDropdown] = useState(false);
-//   const [showAgeDropdown, setShowAgeDropdown] = useState(false);
-//   const [showIncomeDropdown, setShowIncomeDropdown] = useState(false);
-//   const [showSponshershipDropdown, setShowSponshershipDropdown] = useState(false);
-//   const [showDropdownShort, setShowDropdownShort] = useState(false);
-
-//   useEffect(() => {
-//     const checkScreenSize = () => {
-//       setIsDesktop(window.innerWidth > 768); // Adjust breakpoint (768px) as needed for your design
-//     };
-//     checkScreenSize(); // Check initial screen size
-//     window.addEventListener('resize', checkScreenSize); // Listen for screen size changes
-//     return () => {
-//       window.removeEventListener('resize', checkScreenSize); // Clean up listener on unmount
-//     };
-//   }, []);
-
-//   // Hook for handling outside clicks to close dropdowns
-//   useOutsideClick(stateDropdownRef, () => setShowStateDropdown(false));
-//   useOutsideClick(departmentDropdownRef, () => setShowDepartmentDropdown(false));
-//   useOutsideClick(occupationDropdownRef, () => setShowOccupationDropdown(false));
-//   useOutsideClick(beneficiariesDropdownRef, () => setShowBeneficiariesDropdown(false));
-//   useOutsideClick(genderDropdownRef, () => setShowGenderDropdown(false));
-//   useOutsideClick(ageDropdownRef, () => setShowAgeDropdown(false));
-//   useOutsideClick(incomeDropdownRef, () => setShowIncomeDropdown(false));
-//   useOutsideClick(sponshershipDropdownRef, () => setShowSponshershipDropdown(false));
-//   useOutsideClick(sortingDropdownRef, () => setShowDropdownShort(false));
-
-//   // Toggle functions for each dropdown
-//   const toggleStateDropdown = () => {
-//     setShowStateDropdown(!showStateDropdown);
-//     setShowDepartmentDropdown(false);
-//     setShowOccupationDropdown(false);
-//     setShowBeneficiariesDropdown(false);
-//     setShowGenderDropdown(false);
-//     setShowAgeDropdown(false);
-//     setShowIncomeDropdown(false);
-//     setShowSponshershipDropdown(false);
-//     setShowDropdownShort(false);
-//   };
-
-//   const toggleDepartmentDropdown = () => {
-//     setShowDepartmentDropdown(!showDepartmentDropdown);
-//     setShowStateDropdown(false);
-//     setShowOccupationDropdown(false);
-//     setShowBeneficiariesDropdown(false);
-//     setShowGenderDropdown(false);
-//     setShowAgeDropdown(false);
-//     setShowIncomeDropdown(false);
-//     setShowSponshershipDropdown(false);
-//     setShowDropdownShort(false);
-//   };
-
-//   const toggleOccupationDropdown = () => {
-//     setShowOccupationDropdown(!showOccupationDropdown);
-//     setShowStateDropdown(false);
-//     setShowDepartmentDropdown(false);
-//     setShowBeneficiariesDropdown(false);
-//     setShowGenderDropdown(false);
-//     setShowAgeDropdown(false);
-//     setShowIncomeDropdown(false);
-//     setShowSponshershipDropdown(false);
-//     setShowDropdownShort(false);
-//   };
-
-//   const toggleBeneficiariesDropdown = () => {
-//     setShowBeneficiariesDropdown(!showBeneficiariesDropdown);
-//     setShowStateDropdown(false);
-//     setShowDepartmentDropdown(false);
-//     setShowOccupationDropdown(false);
-//     setShowGenderDropdown(false);
-//     setShowAgeDropdown(false);
-//     setShowIncomeDropdown(false);
-//     setShowSponshershipDropdown(false);
-//     setShowDropdownShort(false);
-//   };
-
-//   const toggleGenderDropdown = () => {
-//     setShowGenderDropdown(!showGenderDropdown);
-//     setShowStateDropdown(false);
-//     setShowDepartmentDropdown(false);
-//     setShowOccupationDropdown(false);
-//     setShowBeneficiariesDropdown(false);
-//     setShowAgeDropdown(false);
-//     setShowIncomeDropdown(false);
-//     setShowSponshershipDropdown(false);
-//     setShowDropdownShort(false);
-//   };
-
-//   const toggleAgeDropdown = () => {
-//     setShowAgeDropdown(!showAgeDropdown);
-//     setShowStateDropdown(false);
-//     setShowDepartmentDropdown(false);
-//     setShowOccupationDropdown(false);
-//     setShowBeneficiariesDropdown(false);
-//     setShowGenderDropdown(false);
-//     setShowIncomeDropdown(false);
-//     setShowSponshershipDropdown(false);
-//     setShowDropdownShort(false);
-//   };
-
-//   const toggleIncomeDropdown = () => {
-//     setShowIncomeDropdown(!showIncomeDropdown);
-//     setShowStateDropdown(false);
-//     setShowDepartmentDropdown(false);
-//     setShowOccupationDropdown(false);
-//     setShowBeneficiariesDropdown(false);
-//     setShowGenderDropdown(false);
-//     setShowAgeDropdown(false);
-//     setShowSponshershipDropdown(false);
-//     setShowDropdownShort(false);
-//   };
-
-//   const toggleSponshershipDropdown = () => {
-//     setShowSponshershipDropdown(!showSponshershipDropdown);
-//     setShowStateDropdown(false);
-//     setShowDepartmentDropdown(false);
-//     setShowOccupationDropdown(false);
-//     setShowBeneficiariesDropdown(false);
-//     setShowGenderDropdown(false);
-//     setShowAgeDropdown(false);
-//     setShowIncomeDropdown(false);
-//     setShowDropdownShort(false);
-//   };
-
-//   const toggleSortingDropdown = () => {
-//     setShowDropdownShort(!showDropdownShort);
-//     setShowStateDropdown(false);
-//     setShowDepartmentDropdown(false);
-//     setShowOccupationDropdown(false);
-//     setShowBeneficiariesDropdown(false);
-//     setShowGenderDropdown(false);
-//     setShowAgeDropdown(false);
-//     setShowIncomeDropdown(false);
-//     setShowSponshershipDropdown(false);
-//   };
-
-//   return (
-//     <>
-//       <div className="bg-white font-sans">
-//         <div className="mb-4">
-//           <h1 className="mt-0 mb-4 text-[30px] font-semibold">Schemes</h1>
-//         </div>
-
-//         {isDesktop ? (
-//           // Desktop Buttons
-//           <div className="flex flex-wrap justify-start mb-8">
-//             <button ref={sortingDropdownRef} onClick={toggleSortingDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center justify-center">
-//                 <FaSortAmountDown className="text-gray-600 mr-1" /> Sort
-//               </span>
-//             </button>
-
-//             <button ref={stateDropdownRef} onClick={toggleStateDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center">
-//                 <FaMapMarkerAlt className="text-gray-600 mr-1" /> State
-//               </span>
-//             </button>
-
-//             <button ref={departmentDropdownRef} onClick={toggleDepartmentDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center">
-//                 <FaBuilding className="text-gray-600 mr-1" /> Department
-//               </span>
-//             </button>
-
-//             <button ref={occupationDropdownRef} onClick={toggleOccupationDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center">
-//                 <FaUserTie className="text-gray-600 mr-1" /> Occupation
-//               </span>
-//             </button>
-
-//             <button ref={beneficiariesDropdownRef} onClick={toggleBeneficiariesDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center">
-//                 <FaNetworkWired className="text-gray-600 mr-1" /> Beneficiaries
-//               </span>
-//             </button>
-
-//             <button ref={genderDropdownRef} onClick={toggleGenderDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center">
-//                 <FaVenusMars className="text-gray-600 mr-1" /> Gender
-//               </span>
-//             </button>
-
-//             <button ref={ageDropdownRef} onClick={toggleAgeDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center">
-//                 <FaCalendarAlt className="text-gray-600 mr-1" /> Age
-//               </span>
-//             </button>
-
-//             <button ref={incomeDropdownRef} onClick={toggleIncomeDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center">
-//                 <MdCurrencyRupee className="text-gray-600 text-lg mr-1" /> Income
-//               </span>
-//             </button>
-
-//             <button ref={sponshershipDropdownRef} onClick={toggleSponshershipDropdown} className="mb-2 mr-1.5 p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100">
-//               <span className="flex items-center">
-//                 <RiFundsBoxFill className="text-gray-600 text-lg mr-1" /> Sponshership
-//               </span>
-//             </button>
-
-//           </div>
-//         ) : (
-//           // Mobile Buttons
-//           <div className="mb-4 flex justify-around">
-//             <button onClick={toggleSortingDropdown} className="w-[48%] h-[50px] p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100 text-center">
-//               <span className="flex items-center justify-center">
-//                 <FaSortAmountDown className="text-gray-600 mr-1" /> Sort
-//               </span>
-//             </button>
-
-//             <button onClick={handleFilterClick} className="w-[48%] h-[50px] p-1 rounded-[13px] border border-gray-300 bg-white hover:bg-gray-100 text-center">
-//               <span className="flex items-center justify-center">
-//                 <FaSortAmountDown className="text-gray-600 mr-1" /> Filter
-//               </span>
-//             </button>
-//           </div>
-//         )}
-
-//         {/* Render dropdowns based on state */}
-//         {showStateDropdown && <DropdownStates ref={stateDropdownRef} />}
-//         {showDepartmentDropdown && <DepartmentDropdownMenu ref={departmentDropdownRef} />}
-//         {showOccupationDropdown && <DropdownOccupation ref={occupationDropdownRef} />}
-//         {showBeneficiariesDropdown && <DropdownBenefecries ref={beneficiariesDropdownRef} />}
-//         {showGenderDropdown && <DropdownGender ref={genderDropdownRef} />}
-//         {showAgeDropdown && <DropdownAge ref={ageDropdownRef} />}
-//         {showIncomeDropdown && <DropdownIncome ref={incomeDropdownRef} />}
-//         {showSponshershipDropdown && <DropdownSponshership ref={sponshershipDropdownRef} />}
-//         {showDropdownShort && <DropdownShort ref={sortingDropdownRef} />}
-
-//         <div>
-//           <Categories />
-//         </div>
-//       </div>
-//       <Model isVisible={selectedCategory !== null} category={selectedCategory} onClose={handleCloseModal}/>
-//     </>
-//   );
-// }

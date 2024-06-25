@@ -11,7 +11,11 @@ module.exports = {
       },
       colors: {
         'button-blue': '#3F3BE1',
-      }
+        'custom-gray': '#dddada',
+      },
+      spacing: {
+        '0.5px': '0.03125rem',
+      },
     }
   },
   variants: {},

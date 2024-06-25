@@ -10,7 +10,7 @@ const MainPage = () => {
 
       {/* Main page image */}
       <div className="absolute top-0 w-full z-0">
-        <div className="relative h-60">
+        <div className="relative h-60 brightness-50">
           <Image
             src={MainPageImage}
             alt="Loading Image..."

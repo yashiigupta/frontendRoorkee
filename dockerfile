@@ -1,14 +1,19 @@
 FROM node:22-alpine3.19
+
 WORKDIR /app
 
-ARG ENV=staging
-COPY .env.${ENV} .env
+ARG ENVIRONMENT
+ENV ENVIRONMENT=${ENVIRONMENT}
+
+RUN npm install -g pm2
 
 COPY package*.json ./
 RUN npm install
 
 COPY . .
+
 RUN npm run build
 
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+
+CMD ["pm2-runtime", "ecosystem.config.js"]

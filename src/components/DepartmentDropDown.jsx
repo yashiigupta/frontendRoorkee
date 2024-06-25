@@ -23,7 +23,7 @@ const DepartmentDropdownMenu = React.forwardRef(({ selectedDepartments, setSelec
   }, [selectedDepartments]);
 
   return (
-    <div style={{ top: `${departmentTop + 42}px`, left:  `${departmentLeft}px`}} className="absolute bg-[rgb(251,251,251)] rounded-lg w-auto max-w-[600px] flex flex-col whitespace-wrap" ref={ref}>
+    <div style={{ top: `${departmentTop + 42}px`, left:  `${departmentLeft}px`}} className="absolute bg-[rgb(251,251,251)] rounded-lg w-auto max-w-[600px] flex flex-col whitespace-wrap z-50" ref={ref}>
       <ul className="flex flex-col font-sans list-none p-[0px_23px] text-xs">
         {uniqueCategories.map(item => (
           <li key={item} className="my-[12px] flex items-center">

@@ -19,7 +19,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
   }, [selectedStates]);
   
   return (
-    <div style={{ top: `${stateTop + 42}px`, left:  `${stateLeft}px`}} className="absolute bg-[rgb(251,251,251)] rounded-lg w-auto max-w-[600px] flex flex-col whitespace-wrap" ref={ref}>
+    <div style={{ top: `${stateTop + 42}px`, left:  `${stateLeft}px`}} className="absolute bg-[rgb(251,251,251)] rounded-lg w-auto max-w-[600px] flex flex-col whitespace-wrap z-50" ref={ref}>
       <ul className="flex flex-col font-sans list-none p-0 px-[23px] text-xs">
         {states.map(item => (
           <li key={item} className="my-[12px] flex items-center">

@@ -6,12 +6,12 @@ module.exports = {
   ],
   theme: {
     extend:  {
-      fontFamily: {
-        'sans': ['Arial', 'Helvetica', 'sans-serif'],
-      },
       colors: {
         'button-blue': '#3F3BE1',
         'custom-gray': '#dddada',
+        'dropdown-blue': '#EEEEFF',
+        'onclick-btnblue': '#3431BB',
+        'dropdown-heading': '#576175',
       },
       spacing: {
         '0.5px': '0.03125rem',

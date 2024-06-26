@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaShare } from "react-icons/fa";
-import ShareModal from "./shareModel"; // Adjust the import path as necessary
+import ShareModal from "./shareModel";
 
 const ApplyModal = ({ isOpen, onRequestClose, scheme }) => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const modalRef = useRef(null); // Create a ref for the modal
+  const modalRef = useRef(null);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -32,7 +32,7 @@ const ApplyModal = ({ isOpen, onRequestClose, scheme }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 pr-8 pl-8">
+    <div className="fixed inset-0 z-50 pr-8 pl-8 ">
       <div className="absolute right-0">
         <div
           ref={modalRef}
@@ -108,6 +108,22 @@ const ApplyModal = ({ isOpen, onRequestClose, scheme }) => {
               <hr />
             </div>
 
+            {/* Apply button */}
+            <div>
+              <div className="absolute z-50 bottom-8 right-8 w-100 mb-[70px]">
+                {scheme.url && (
+                  <a
+                    href={scheme.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="py-3 px-12 bg-blue-800 text-white font-semibold rounded-[10px] transition hover:bg-red-500"
+                  >
+                    Apply
+                  </a>
+                )}
+              </div>
+            </div>
+
             {/* Share button */}
             {/* <div>
               <button
@@ -129,20 +145,6 @@ const ApplyModal = ({ isOpen, onRequestClose, scheme }) => {
             />
           </div>
         </div>
-      </div>
-
-      {/* Apply button */}
-      <div className="absolute z-50 bottom-8 right-8 w-100">
-        {scheme.url && (
-          <a
-            href={scheme.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="py-3 px-12 bg-blue-800 text-white font-semibold rounded-[10px] transition hover:bg-red-500"
-          >
-            Apply
-          </a>
-        )}
       </div>
     </div>
   );

@@ -73,9 +73,6 @@ const DepartmentDropdownMenu = React.forwardRef(({ selectedDepartments, setSelec
             <p className = "font-semibold tracking-wider">ALL</p>
           </div>
         )}
-        {/* <div className='pl-[8px] pr-[8px] pb-[7px] pt-[8px] text-gray-400'>
-            <p className = "font-semibold tracking-wider">ALL</p>
-          </div> */}
         {uniqueCategories.filter(item => !selectedDepartments.includes(item)).map((item, index) => (
           <li key={item + index} className="flex items-center justify-between hover:bg-gray-100 h-9 pl-[8px] pr-[8px] pt-[18px] pb-[18px] rounded-[8px] text-black">
             {item}

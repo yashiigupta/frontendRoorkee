@@ -32,7 +32,7 @@ const ShareModal = ({ isOpen, onRequestClose, shareUrl }) => {
         isOpen={isOpen}
         onRequestClose={onRequestClose}
         contentLabel="Share Modal"
-        className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto mt-20 relative"
+        className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto mt-20 z-80 relative"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
       >
         <h2 className="text-xl font-bold mb-4">Share this scheme</h2>

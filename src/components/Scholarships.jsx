@@ -1,15 +1,5 @@
-import { IoArrowBackOutline } from "react-icons/io5";
-import { GoSortDesc } from "react-icons/go";
-import { FiMapPin } from "react-icons/fi";
-import { BsBuilding } from "react-icons/bs";
-import { IoIosPeople } from "react-icons/io";
-// import { LiaBriefcaseSolid } from "react-icons/lia";
-import { PiGraduationCap } from "react-icons/pi";
-import { MdCurrencyRupee } from "react-icons/md";
-// import { PiBriefcaseLight } from "react-icons/pi";
-import { CiBank } from "react-icons/ci";
-import { BsPeople } from "react-icons/bs";
-import { IoNewspaperOutline } from "react-icons/io5";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { IoMdAdd } from "react-icons/io";
 import React, { useState, useRef, useEffect } from "react";
 import Categories from "./Categories";
 import DropdownMenu from "./DropdownMenu";
@@ -20,6 +10,10 @@ import IncomeDropdownMenu from "./IncomeDropdown";
 import FundingByDropdownMenu from "./FundingBy";
 
 export default function Scholarships() {
+  const [departmentName, setDepartmentName] = useState("");
+  const [beneficiaryName, setBeneficiaryName] = useState("");
+  const [funderName, setFunderName] = useState("");
+
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedBeneficiaries, setSelectedBeneficiaries] = useState([]);
   const [selectedAges, setSelectedAges] = useState([]);
@@ -95,23 +89,21 @@ export default function Scholarships() {
   return (
     <div className="bg-white font-sans mt-9">
       <h1 className="mt-0 mb-6 font-semibold text-3xl">Scholarships</h1>
-      <div className="mt-0 w-full flex flex-wrap gap-3 mb-15 font-sans">
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200"><GoSortDesc className="text-gray-400 text-lg mr-1.5"/> Sort</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick={handleDropdownClick} id = "stateBtn"><FiMapPin className="text-gray-400 text-lg mr-1.5"/> State</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick={handleDepartmentClick} id = "departmentBtn"><BsBuilding className="text-gray-400 text-lg mr-1.5"/> Department</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick = {handleBeneficiariesClick} id = "beneficiaryBtn"><IoIosPeople className="text-gray-400 text-xl mr-1.5"/> Beneficiaries</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick = {handleFundersClick} id = "fundingbyBtn"><CiBank className="text-gray-400 text-xl mr-1.5"/>Funding by</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick = {handleIncomeClick} id = "incomeBtn"><MdCurrencyRupee className="text-gray-400 text-xl mr-1.5"/>Income</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200" onClick = {handleAgeClick} id = "ageBtn"><BsPeople className="text-gray-400 text-lg mr-1.5"/>Age</button>
-        <button className="flex font-light text-sm py-2.5 px-3.5 rounded-lg border border-gray-300 bg-white cursor-pointer hover:bg-gray-200"><IoNewspaperOutline className="text-gray-400 text-lg mr-1.5"/>Application deadline</button>
+      <div className="mt-0 w-full flex flex-wrap gap-2 mb-15 font-sans items-center pt-[4px] pb-[4px] pr-[8px] pl-[2px] text-gray-600">
+        <p className="font-normal text-{14} mr-2">Filter Scholarships by</p>
+        <button className = {dropDownOpen ? `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] text-onclick-btnblue border border-onclick-btnblue bg-dropdown-blue cursor-pointer` : `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] border border-gray-300 bg-white cursor-pointer hover:bg-gray-200 hover:border-none items-center`} onClick={handleDropdownClick} id = "stateBtn"> State <MdKeyboardArrowDown className="text-[20px] text-{#616161}"/></button>
+        <button className={departmentOpen ? `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] text-onclick-btnblue border border-onclick-btnblue bg-dropdown-blue cursor-pointer` : `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] border border-gray-300 bg-white cursor-pointer hover:bg-gray-200 hover:border-none items-center`} onClick={handleDepartmentClick} id = "departmentBtn">{departmentName !== "" ? `Department is ${departmentName}` : "Department"} <MdKeyboardArrowDown className="text-[20px] text-{#616161}"/></button>
+        <button className = {beneficiaryOpen ? `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] text-onclick-btnblue border border-onclick-btnblue bg-dropdown-blue cursor-pointer` : `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] border border-gray-300 bg-white cursor-pointer hover:bg-gray-200 hover:border-none items-center`} onClick = {handleBeneficiariesClick} id = "beneficiaryBtn">{beneficiaryName !== "" ? `Beneficiary is ${beneficiaryName}` : "Beneficiairies"}<MdKeyboardArrowDown className="text-[20px] text-{#616161}"/></button>
+        <button className={fundersOpen ? `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] text-onclick-btnblue border border-onclick-btnblue bg-dropdown-blue cursor-pointer` : `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] border border-gray-300 bg-white cursor-pointer hover:bg-gray-200 hover:border-none items-center`} onClick = {handleFundersClick} id = "fundingbyBtn">{funderName !== "" ? `Funder is ${funderName}` : "Funding by"}<MdKeyboardArrowDown className="text-[20px] text-{#616161}"/></button>
+        <button className={incomeOpen ? `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] text-onclick-btnblue border border-onclick-btnblue bg-dropdown-blue cursor-pointer` : `flex font-normal gap-1 py-1.5 pl-3.5 pr-1.5 rounded-[40px] text-[14px] border border-gray-300 bg-white cursor-pointer hover:bg-gray-200 hover:border-none items-center`} onClick = {handleIncomeClick} id = "incomeBtn">More Filters <IoMdAdd className="text-[20px] text-{#616161}"/></button>
       </div>
 
       {dropDownOpen && <DropdownMenu ref={dropdownRef} />}
-      {departmentOpen && <DepartmentDropdownMenu ref={departmentDropdownRef} selectedDepartments={selectedDepartments} setSelectedDepartments={setSelectedDepartments} />}
-      {beneficiaryOpen && <BeneficiaryDropdownMenu ref = {beneficiaryDropdownRef} selectedBeneficiaries = {selectedBeneficiaries} setSelectedBeneficiaries = {setSelectedBeneficiaries} />}
+      {departmentOpen && <DepartmentDropdownMenu ref={departmentDropdownRef} selectedDepartments={selectedDepartments} setSelectedDepartments={setSelectedDepartments} setDepartmentName = {setDepartmentName} />}
+      {beneficiaryOpen && <BeneficiaryDropdownMenu ref = {beneficiaryDropdownRef} selectedBeneficiaries = {selectedBeneficiaries} setSelectedBeneficiaries = {setSelectedBeneficiaries} setBeneficiaryName = {setBeneficiaryName} />}
       {ageOpen && <AgeDropdownMenu ref = {ageDropdownRef} selectedAges = {selectedAges} setSelectedAges = {setSelectedAges} />}
       {incomeOpen && <IncomeDropdownMenu ref = {incomeDropdownRef} selectedIncomes = {selectedIncomes} setSelectedIncomes = {setSelectedIncomes} />}
-      {fundersOpen && <FundingByDropdownMenu ref = {funderDropdownRef} selectedFunders = {selectedFunders} setSelectedFunders = {setSelectedFunders} />}
+      {fundersOpen && <FundingByDropdownMenu ref = {funderDropdownRef} selectedFunders = {selectedFunders} setSelectedFunders = {setSelectedFunders} setFunderName = {setFunderName} />}
       <Categories selectedDepartments={selectedDepartments} selectedBeneficiaries = {selectedBeneficiaries} selectedAges = {selectedAges} selectedFunders = {selectedFunders} selectedIncomes = {selectedIncomes}/>
     </div>
   );

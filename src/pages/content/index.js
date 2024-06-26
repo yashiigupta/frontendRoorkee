@@ -1,122 +1,151 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { FaArrowLeft, FaShare } from "react-icons/fa";
-import ShareModal from "./shareModel";
+import React, { useState, useEffect, useRef } from "react";
+import { IoMdClose } from "react-icons/io";
+import { FaShare } from "react-icons/fa";
+import ShareModal from "./shareModel"; // Adjust the import path as necessary
 
-const Apply = () => {
-  const router = useRouter();
-  const {
-    department,
-    title,
-    beneficiary_scheme_name,
-    eligibility_criteria,
-    introduced_date,
-    scheme_link,
-  } = router.query;
-
+const ApplyModal = ({ isOpen, onRequestClose, scheme }) => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const modalRef = useRef(null); // Create a ref for the modal
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        onRequestClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen, onRequestClose]);
+
+  if (!isOpen) return null;
 
   const toggleShareModal = () => {
     setIsShareModalOpen(!isShareModalOpen);
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center">
-      {/* Back Button */}
-      <div className="text-black mt-4 ml-4 absolute top-0 left-0">
-        <button
-          className="text-black py-2 px-4 rounded flex items-center transition duration-300 ease-in-out hover:font-bold"
-          onClick={() => router.back()}
+    <div className="fixed inset-0 z-50 pr-8 pl-8">
+      <div className="absolute right-0">
+        <div
+          ref={modalRef}
+          className="bg-white w-full max-w-2xl p-8 rounded-lg relative border border-gray-200 shadow-lg shadow-black-400"
         >
-          <FaArrowLeft className="h-5 w-5 mr-2" />
-          Back
-        </button>
-      </div>
-
-      {/* Main content */}
-      <div className="pt-20 px-4 w-full sm:max-w-3xl">
-        <div className="flex items-center justify-between">
-          {/*first row contaioning heading, last update date, share button */}
-          <div className="flex items-center">
-            <h1 className="mr-4 font-bold">
-              {department || "Data is not available"}
-            </h1>
-            <p className="py-0.5 px-2 bg-gray-200 text-black rounded text-sm">
-              {introduced_date && `Last updates on ${introduced_date}`}
-            </p>
-          </div>
+          {/* Close button */}
           <button
-            className="flex items-center py-2 px-4 rounded transition duration-300 ease-in-out hover:text-red-500"
-            onClick={toggleShareModal}
+            className="absolute top-4 right-4 p-2 text-lg transition duration-300 ease-in-out hover:text-red-500"
+            onClick={onRequestClose}
           >
-            <FaShare className="h-5 w-5 mr-2" />
-            Share scheme
+            <IoMdClose className="w-6 h-6" />
           </button>
-        </div>
 
-        {/* Details section */}
-        <div className="mt-8 space-y-4 w-full">
-          {/* Department */}
-          <div className="flex items-start">
-            <h1 className="text-lg font-semibold w-36">Department:</h1>
-            <p className="ml-2 flex-1">
-              {department || "Data is not available"}
-            </p>
+          <div className="flex flex-col items-center min-h-screen bg-white overflow-y-auto max-h-[calc(100vh-8rem)]">
+            {/* Scheme name */}
+            <div className="pt-2 w-full sm:max-w-3xl flex justify-between items-center">
+              <h1 className="mr-4 font-bold">
+                {scheme.scheme_name || "Data is not available"}
+              </h1>
+            </div>
+            {/* Last update date */}
+            <div className="w-full sm:max-w-3xl">
+              <div className="inline-block bg-purple-100 rounded-full mt-2">
+                <p className="py-0.5 px-2 text-black text-sm">
+                  Last updates on 12.09.2024
+                  {/* {scheme.introduced_on && `Last updates on ${scheme.introduced_on}`} */}
+                </p>
+              </div>
+            </div>
+
+            {/* Main data section */}
+            <div className="mt-8 space-y-4 w-full sm:max-w-3xl p-4">
+              <div className="flex items-start pb-2">
+                <h1 className="text-lg font-semi-bold w-36">Department </h1>
+                <p className="ml-2 flex-1">
+                  {scheme.department || "Data is not available"}
+                </p>
+              </div>
+              <hr />
+
+              <div className="flex items-start pb-2 pt-2">
+                <h1 className="text-lg font-semi-bold w-36">Title</h1>
+                <p className="ml-2 flex-1">
+                  {scheme.scheme_name || "Data is not available"}
+                </p>
+              </div>
+              <hr />
+
+              <div className="flex items-start pb-2 pt-2">
+                <h1 className="text-lg font-semi-bold w-36">Who can apply</h1>
+                <p className="ml-2 flex-1">
+                  {scheme.beneficiary_category || "Data is not available"}
+                </p>
+              </div>
+              <hr />
+
+              <div className="flex items-start pb-2 pt-2">
+                <h1 className="text-lg font-semi-bold w-36">
+                  Eligibility criteria
+                </h1>
+                <p className="ml-2 flex-1">
+                  {scheme.how_to_avail || "Data is not available"}
+                </p>
+              </div>
+              <hr />
+
+              <div className="flex items-start pb-2 pt-2">
+                <h1 className="text-lg font-semi-bold w-36">Uploaded file</h1>
+                <p className="ml-2 flex-1">
+                  {scheme.how_to_avail || "File not available"}
+                </p>
+              </div>
+              <hr />
+            </div>
+
+            {/* Share button */}
+            {/* <div>
+              <button
+                className="flex items-center py-2 px-4 rounded transition duration-300 ease-in-out hover:text-red-500"
+                onClick={toggleShareModal}
+              >
+                <FaShare className="h-5 w-5 mr-2" />
+                Share scheme
+              </button>
+            </div> */}
+
+            {/* Share Modal */}
+            <ShareModal
+              isOpen={isShareModalOpen}
+              onRequestClose={toggleShareModal}
+              shareUrl={
+                typeof window !== "undefined" ? window.location.href : ""
+              }
+            />
           </div>
-          <hr />
-
-          {/* Title */}
-          <div className="flex items-start">
-            <h1 className="text-lg font-semibold w-36">Title:</h1>
-            <p className="ml-2 flex-1">{title || "Data is not available"}</p>
-          </div>
-          <hr />
-
-          {/* Who can apply */}
-          <div className="flex items-start">
-            <h1 className="text-lg font-semibold w-36">Who can apply:</h1>
-            <p className="ml-2 flex-1">
-              {beneficiary_scheme_name || "Data is not available"}
-            </p>
-          </div>
-          <hr />
-
-          {/* Eligibility criteria */}
-          <div className="flex items-start">
-            <h1 className="text-lg font-semibold w-36">
-              Eligibility criteria:
-            </h1>
-            <p className="ml-2 flex-1">
-              {eligibility_criteria || "Data is not available"}
-            </p>
-          </div>
-          <hr />
-        </div>
-
-        {/* Apply button */}
-        <div className="mt-4 flex justify-center w-full">
-          {scheme_link && (
-            <a
-              href={scheme_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full max-w-[90%] sm:max-w-fit py-2 px-10 bg-black text-white font-semibold rounded-[10px] transition hover:bg-red-500 text-center"
-              // className="w-full max-w-[90%] py-2 px-10 bg-black text-white font-semibold rounded-[10px] transition hover:bg-red-500 text-center"
-            >
-              Apply
-            </a>
-          )}
         </div>
       </div>
 
-      {/* Share Modal */}
-      <ShareModal
-        isOpen={isShareModalOpen}
-        onRequestClose={toggleShareModal}
-        shareUrl={typeof window !== "undefined" ? window.location.href : ""}
-      />
+      {/* Apply button */}
+      <div className="absolute z-50 bottom-8 right-8 w-100">
+        {scheme.url && (
+          <a
+            href={scheme.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-3 px-12 bg-blue-800 text-white font-semibold rounded-[10px] transition hover:bg-red-500"
+          >
+            Apply
+          </a>
+        )}
+      </div>
     </div>
   );
 };
 
-export default Apply;
+export default ApplyModal;

@@ -5,7 +5,7 @@ import MainPageImage from "../assets/backgroundimg.png";
 
 const MainPage = () => {
   return (
-    <div className="mb-[210px]">
+    <div className="mb-[180px]">
       <NavBar />
 
       {/* Main page image */}

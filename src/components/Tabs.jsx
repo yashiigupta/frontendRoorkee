@@ -12,6 +12,8 @@ export default function Tabs(props) {
   };
 
   return (
+    <div>
+      <BackButton/>
     <div className="mt-5 flex justify-center items-center mb-5">
       <button
         className={`flex-grow text-center font-sm py-3 rounded-md border-none text-sm cursor-pointer font-sans ${
@@ -43,6 +45,7 @@ export default function Tabs(props) {
       >
         Scholarships
       </button>
+    </div>
     </div>
   );
 }

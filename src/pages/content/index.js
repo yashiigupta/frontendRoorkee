@@ -21,7 +21,7 @@ const ApplyModal = ({ isOpen, onRequestClose, scheme }) => {
             className="absolute top-8 right-4 p-4 text-lg transition duration-300 ease-in-out hover:text-red-500"
             onClick={onRequestClose}
           >
-            <IoMdClose className="w-6 h-6" />
+            <IoMdClose className="w-[24px] h-[24px]" />
           </button>
 
           <div className="flex flex-col items-center min-h-screen bg-white overflow-y-auto max-h-[calc(100vh-8rem)]">
@@ -57,6 +57,7 @@ const ApplyModal = ({ isOpen, onRequestClose, scheme }) => {
                   {scheme.scheme_name || "Data is not available"}
                 </p>
               </div>
+              <hr/>
 
 
               <div className="flex items-start pb-2 pt-2">

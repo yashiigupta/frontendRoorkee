@@ -25,7 +25,7 @@ const FundingByDropdownMenu = React.forwardRef(({ selectedFunders, setSelectedFu
       if (fundingbyBtn) {
         const { top, left } = fundingbyBtn.getBoundingClientRect();
         setDropdownStyle({
-          top: `${top + window.scrollY + 35}px`,
+          top: `${top + window.scrollY + 31}px`,
           left: `${left + window.scrollX}px`,
         });
       }

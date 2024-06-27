@@ -12,7 +12,7 @@ const DropdownMenu = React.forwardRef((props, ref) => {
       if (stateBtn) {
         const { top, left } = stateBtn.getBoundingClientRect();
         setDropdownStyle({
-          top: `${top + window.scrollY + 35}px`,
+          top: `${top + window.scrollY + 31}px`,
           left: `${left + window.scrollX}px`,
         });
       }

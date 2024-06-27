@@ -25,7 +25,7 @@ const BeneficiaryDropdownMenu = React.forwardRef(({ selectedBeneficiaries, setSe
       if (beneficiaryBtn) {
         const { top, left } = beneficiaryBtn.getBoundingClientRect();
         setDropdownStyle({
-          top: `${top + window.scrollY + 35}px`,
+          top: `${top + window.scrollY + 31}px`,
           left: `${left + window.scrollX}px`,
         });
       }
